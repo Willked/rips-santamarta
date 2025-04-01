@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "sysclinsoft-santamarta"
-  }
+    "default": "sysclinsoft-santamarta",
+    "santamarta": "rips-santamarta"
+  },
+  "targets": {},
+  "etags": {}
 }
