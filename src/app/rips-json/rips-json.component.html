@@ -1,0 +1,204 @@
+<div class="container text-center">
+  <h1><b>GENERADOR DE RIPS</b></h1>
+  <h3><i>Generador de RIPS en formato JSON</i></h3>
+</div>
+
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row mb-3">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title">Datos de la transacción</h2>
+          <div class="row">
+            <div class="form-group col-md-4 mb-3">
+              <label class="form-label">Número factura</label>
+              <input
+                type="text"
+                formControlName="numFactura"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['numFactura'].errors }"
+              />
+              <div *ngIf="submitted && f['numFactura'].errors" class="invalid-feedback">
+                <div *ngIf="f['numFactura'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Tipo de nota</label>
+              <div class="form-group">
+                <select
+                    formControlName="tipoNota"
+                    class="form-control"
+                  >
+                    <option value="null">No tiene</option>
+                    <option value="01">Nota crédito</option>
+                    <option value="02">Nota débito</option>
+                    <option value="03">Nota ajuste</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group col-md-4 mb-3">
+              <label class="form-label">Número de la nota</label>
+              <input
+                type="text"
+                formControlName="numNota"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['numNota'].errors }"
+              />
+              <div *ngIf="submitted && f['numNota'].errors" class="invalid-feedback">
+                <div *ngIf="f['numNota'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title">Datos del Usuario</h2>
+          <div class="row">
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Tipo de documento</label>
+              <div class="form-group">
+                <select
+                    formControlName="tipoDocumento"
+                    class="form-control"
+                  >
+                    <option value="CC">Cédula ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
+                    <option value="CD">Carné diplomático</option>
+                    <option value="PA">Pasaporte</option>
+                    <option value="SC">Salvoconducto</option>
+                    <option value="PE">Permiso Especial de Permanencia</option>
+                    <option value="RC">Registro civil</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                    <option value="CN">Certificado de nacido vivo</option>
+                    <option value="AS">Adulto sin identificar</option>
+                    <option value="MS">Menor sin identificar</option>
+                    <option value="DE">Documento extranjero</option>
+                    <option value="PT">Permiso temporal de permanencia</option>
+                    <option value="SI">Sin identificación</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Número de documento</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="numDocumento"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['numDocumento'].errors }"
+                />
+                <div *ngIf="submitted && f['numDocumento'].errors" class="invalid-feedback">
+                  <div *ngIf="f['numDocumento'].errors['required']">* Campo requerido</div>
+                  <div *ngIf="f['numDocumento'].errors['validarCedula']">* Minimo 4 caracteres requeridos</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Tipo de usuario</label>
+              <div class="form-group">
+                <select
+                    formControlName="tipoUsuario"
+                    class="form-control"
+                  >
+                    <option value="01">Contributivo cotizante</option>
+                    <option value="02">Contributivo beneficiario</option>
+                    <option value="03">Contributivo adicional</option>
+                    <option value="04">Subsidiado</option>
+                    <option value="05">No afiliado</option>
+                    <option value="06">Especial o Excepción cotizante</option>
+                    <option value="07">Especial o Excepción beneficiario</option>
+                    <option value="08">Personas privadas de la libertad a cargo del Fondo Nacional de Salud</option>
+                    <option value="09">Tomador / Amparado ARL</option>
+                    <option value="10">Tomador / Amparado SOAT</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Fecha de nacimiento</label>
+              <input
+                type="date"
+                formControlName="fecNacimiento"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['fecNacimiento'].errors }"
+                value="{{ now | date: 'dd/MM/yyyy' }}"
+              />
+              <div *ngIf="submitted && f['fecNacimiento'].errors" class="invalid-feedback">
+                <div *ngIf="f['fecNacimiento'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Sexo</label>
+              <div class="form-group">
+                <select
+                    formControlName="sexo"
+                    class="form-control"
+                  >
+                    <option value="M">Masculino</option>
+                    <option value="I">Indeterminado o Intersexual</option>
+                    <option value="F">Femenino</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Municipio de residencia</label>
+              <div class="form-group">
+                <select
+                    formControlName="municipio"
+                    class="form-control"
+                  >
+                    <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+                      {{ ciudad.nombre}}
+                    </option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Zona de residencia</label>
+              <div class="form-group">
+                <select
+                    formControlName="zonaResidencia"
+                    class="form-control"
+                  >
+                    <option value="01">Rural</option>
+                    <option value="02">Urbano</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Incapacidad</label>
+              <div class="form-group">
+                <select
+                    formControlName="incapacidad"
+                    class="form-control"
+                  >
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <app-consultas (sendConsultas)="getConsultas($event)" (sendSubtotal)="getSubtotalConsultas($event)"></app-consultas>
+    <app-procedimientos (sendProcedimientos)="getProcedimientos($event)" (sendSubtotal)="getSubtotalProcedimientos($event)"></app-procedimientos> -->
+    <app-otros-servicios (sendOtrosServicios)="getOtrosServicios($event)" (sendSubtotal)="getSubtotalServicios($event)"></app-otros-servicios>
+    <div>
+      <div class="row align-items-start">
+        <div class="col text-end">
+          <h3>Total Factura: <b>{{ totalFactura | currency}}</b></h3>
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-5 mt-4 d-flex justify-content-between">
+      <button type="button" class="btn btn-outline-danger" (click)="limpiarFormulario()">Limpiar formulario</button>
+      <button type="submit" class="btn btn-outline-primary">Descargar RIPS</button>      
+    </div>
+  </form>
+</div>
+
+

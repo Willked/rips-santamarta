@@ -1,0 +1,221 @@
+<div class="row mb-3">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h2 class="card-title">Otros Servicios</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-3 mb-3">
+            <label class="form-label">Fecha</label>
+            <div class="form-group">
+              <input
+                type="date"
+                formControlName="fecha"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['fecha'].errors }"
+                value="{{ currentDate | date: 'dd/MM/yyyy' }}"
+              />
+              <div *ngIf="submitted && f['fecha'].errors" class="invalid-feedback">
+                <div *ngIf="f['fecha'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-2 mb-3">
+            <label class="form-label">Hora</label>
+            <div class="form-group">
+              <input
+                type="time"
+                formControlName="hora"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['hora'].errors }"
+              />
+              <div *ngIf="submitted && f['hora'].errors" class="invalid-feedback">
+                <div *ngIf="f['hora'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-7 mb-3"></div>
+          <div class="form-group col-md-6 mb-3">
+            <label class="form-label">Tecnología</label>
+            <div class="form-group">
+              <select
+                  formControlName="tecnologia"
+                  class="form-control"
+                >
+                <option *ngFor="let tecno of tecnologia" [value]="tecno.codigo">
+                  {{ tecno.codigo }} - {{ tecno.nombre}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-3 mb-3">
+            <label class="form-label">Responsable</label>
+            <div class="form-group">
+              <select
+                  formControlName="responsable"
+                  class="form-control"
+                >
+                <option *ngFor="let respon of responsables" [value]="respon.codigo">
+                  {{ respon.nombre}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-3 mb-3">
+            <label class="form-label">Valor</label>
+            <div class="form-group">
+              <input
+                type="number"
+                formControlName="valorunit"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['valorunit'].errors }"
+              />
+              <div *ngIf="submitted && f['valorunit'].errors" class="invalid-feedback">
+                <div *ngIf="f['valorunit'].errors['required']">* Campo requerido</div>
+                <div *ngIf="f['valorunit'].errors['min']">* Valor mayor a 0</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-10 mb-3"></div>
+          <div class="form-group col-md-2 mb-3 mt-4">
+            <button type="submit" class="btn btn-outline-primary">Agregar item</button>
+          </div>
+        </div>
+      </form>
+      <br/>
+      <div class="table-responsive text-nowrap">
+        <div class="row align-items-start">
+          <div class="col">
+            <h3>Llevas <b>{{items}}</b> servicio(s).</h3>
+          </div>
+          <div class="col text-end">
+            <h3>Valor total: <b>{{ totalValue | currency}}</b></h3>
+          </div>
+        </div>
+        <table class="table">
+          <thead class="table-light">
+              <tr class="table-primary text-center">
+                  <th scope="col">Fecha<br/>Hora</th>
+                  <th scope="col">Tecnología</th>
+                  <th scope="col">Profesional</th>
+                  <th scope="col">Valor<br/>Total</th>
+                  <th>acción</th>
+              </tr>
+          </thead>
+          <tbody class="table-border-bottom-0 table-color">
+            <tr *ngIf="otrosArray.length === 0">
+              <td colspan="10" class="text-center">No hay registros!</td>
+            </tr>
+            <tr *ngFor="let proc of otrosArray" class="text-center">
+                <td class="align-middle">{{proc.fecha | date: 'dd/MM/yyyy'}}<br/>{{proc.hora}}</td>
+                <td class="align-middle">{{proc.tecnologia}}<br/>{{proc.nomTecnologia}}</td>
+                <td class="align-middle">{{proc.tipoDocumentoMedico}}-{{proc.documentoMedico}}<br/>{{proc.nombreMedico}}</td>
+                <td class="align-middle">{{proc.valor | currency}}</td>
+                <td class="align-middle text-center">
+                  <button type="button" (click)="openModal(myModalContent, proc.id)" class="btn btn-success" data-bs-toggle="tooltip" title="Editar"><b><i class="bi bi-pencil"></i></b></button>
+                  &nbsp;
+                  <button type="button" (click)="onRemove(proc.id)" class="btn btn-danger" data-bs-toggle="tooltip" title="Eliminar"><b><i class="bi bi-trash3"></i></b></button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>
+
+
+<!-- bloque para modal -->
+<ng-template #myModalContent let-modal>
+  <div class="modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="card-title">Editar Otros Servicios</h2>
+          <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formModal" (ngSubmit)="onEdit()">
+          <div class="row">
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Fecha</label>
+              <div class="form-group">
+                <input
+                  type="date"
+                  formControlName="fechaModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['fechaModal'].errors }"
+                  value="{{ currentDate | date: 'dd/MM/yyyy' }}"
+                />
+                <div *ngIf="submitted && g['fechaModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['fechaModal'].errors['required']">* Campo requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-2 mb-3">
+              <label class="form-label">Hora</label>
+              <div class="form-group">
+                <input
+                  type="time"
+                  formControlName="horaModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['horaModal'].errors }"
+                />
+                <div *ngIf="submitted && g['horaModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['horaModal'].errors['required']">* Campo requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-7 mb-3"></div>
+            <div class="form-group col-md-6 mb-3">
+              <label class="form-label">Tecnología</label>
+              <div class="form-group">
+                <select
+                    formControlName="tecnologiaModal"
+                    class="form-control"
+                  >
+                  <option *ngFor="let tecno of tecnologia" [value]="tecno.codigo">
+                    {{ tecno.codigo }} - {{ tecno.nombre}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Responsable</label>
+              <div class="form-group">
+                <select
+                    formControlName="tipoModal"
+                    class="form-control"
+                  >
+                  <option *ngFor="let respon of responsables" [value]="respon.codigo">
+                    {{ respon.nombre}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Valor</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  formControlName="valorunitModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['valorunitModal'].errors }"
+                />
+                <div *ngIf="submitted && g['valorunitModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['valorunitModal'].errors['required']">* Campo requerido</div>
+                  <div *ngIf="g['valorunitModal'].errors['min']">* Valor mayor a 0</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-10 mb-3"></div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="onEdit()">Editar item</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

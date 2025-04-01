@@ -1,0 +1,71 @@
+{
+  "clinica":[
+    {
+      "nombre": "AMBULANCIAS SANTA MARTA SAS",
+      "nit": "901799284",
+      "codigo": "252690509501"
+    }
+  ],
+  "servicios": [
+  ],
+  "consultas":[
+  ],
+  "diagnosticos":[
+  ],
+  "tecnologia":[
+    {
+      "codigo": "601T01",
+      "nombre": "TRASLADO ASISTENCIAL BASICO TERRESTRE PRIMARIO"
+    },
+    {
+      "codigo": "601T02",
+      "nombre": "TRASLADO ASISTENCIAL BÁSICO TERRESTRE SECUNDARIO"
+    },
+    {
+      "codigo": "602T01",
+      "nombre": "TRASLADO ASISTENCIAL MEDICALIZADO TERRESTRE PRIMARIO"
+    },
+    {
+      "codigo": "602T02",
+      "nombre": "TRASLADO ASISTENCIAL MEDICALIZADO TERRESTRE SECUNDARIO"
+    },
+    {
+      "codigo": "602T01",
+      "nombre": "TRASLADO NEONATAL MEDICALIZADO"
+    }
+  ],
+  "personal":[
+    {
+      "tipoDocumento": "CC",
+      "documento": "1073151347",
+      "nombre": "JULIAN DAVID PATIÑO",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 1
+    },
+    {
+      "tipoDocumento": "CC",
+      "documento": "1070976487",
+      "nombre": "LEIDY KATHERINE ORDOÑEZ VERA",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 2
+    },{
+      "tipoDocumento": "CC",
+      "documento": "1004037813",
+      "nombre": "KELY ALEXANDRA DIAZ LONDOÑO",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 3
+    },{
+      "tipoDocumento": "CC",
+      "documento": "1070980344",
+      "nombre": "ZARITH VANESA MARTINEZ SIERRA",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 4
+    },{
+      "tipoDocumento": "CC",
+      "documento": "1003511220",
+      "nombre": "ERIKA LISETH SILVA BARBOSA",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 5
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+<div class="row mb-3">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h2 class="card-title">Datos del procedimiento</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-3 mb-3">
+            <label class="form-label">Fecha</label>
+            <div class="form-group">
+              <input
+                type="date"
+                formControlName="fecha"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['fecha'].errors }"
+                value="{{ currentDate | date: 'dd/MM/yyyy' }}"
+              />
+              <div *ngIf="submitted && f['fecha'].errors" class="invalid-feedback">
+                <div *ngIf="f['fecha'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-2 mb-3">
+            <label class="form-label">Hora</label>
+            <div class="form-group">
+              <input
+                type="time"
+                formControlName="hora"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['hora'].errors }"
+              />
+              <div *ngIf="submitted && f['hora'].errors" class="invalid-feedback">
+                <div *ngIf="f['hora'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-7 mb-3"></div>
+          <div class="form-group col-md-4 mb-3">
+            <label class="form-label">Procedimiento</label>
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="codigo"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['codigo'].errors }"
+              />
+              <div *ngIf="submitted && f['codigo'].errors" class="invalid-feedback">
+                <div *ngIf="f['codigo'].errors['required']">* Campo requerido</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-5 mb-3">
+            <label class="form-label">Tipo de procedimiento</label>
+            <div class="form-group">
+              <select
+                  formControlName="tipoProcedimiento"
+                  class="form-control"
+                >
+                <option *ngFor="let servicio of serviciosClinica" [value]="servicio.codigo">
+                  {{ servicio.nombre}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-3 mb-3">
+            <label class="form-label">Finalidad</label>
+            <div class="form-group">
+              <select
+                  formControlName="tipoDx"
+                  class="form-control"
+                >
+                <option value="15">Diagnóstico</option>
+                <option value="16">Tratamiento</option>
+                <option value="17">Rehabilitación</option>
+                <option value="44">Otra</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-5 mb-3">
+            <label class="form-label">Via de ingreso</label>
+            <div class="form-group">
+              <select
+                  formControlName="viaIngreso"
+                  class="form-control"
+                >
+                <option value="01">Demanda espontánea</option>
+                <option value="02">Derivado de consulta externa</option>
+                <option value="03">Derivado de urgencias</option>
+                <option value="04">Derivado de hospitalización</option>
+                <option value="05">Derivado de sala de cirugía</option>
+                <option value="06">Derivado de sala de partos</option>
+                <option value="07">Recién nacido en la institución</option>
+                <option value="08">Recién nacido en otra institución</option>
+                <option value="09">Derivado o referido de hospitalización domiciliaria</option>
+                <option value="10">Derivado de atención domiciliaria</option>
+                <option value="11">Derivado de telemedicina</option>
+                <option value="12">Derivado de jornada de salud</option>
+                <option value="13">Referido de otra institución</option>
+                <option value="14">Contrarreferido de otra institución</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-2 mb-3">
+            <label class="form-label">Valor</label>
+            <div class="form-group">
+              <input
+                type="number"
+                formControlName="valor"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['valor'].errors }"
+              />
+              <div *ngIf="submitted && f['valor'].errors" class="invalid-feedback">
+                <div *ngIf="f['valor'].errors['required']">* Campo requerido</div>
+                <div *ngIf="f['valor'].errors['min']">* Valor mayor a 0</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-2 mb-3 mt-4">
+            <button type="submit" class="btn btn-outline-primary">Agregar item</button>
+          </div>
+        </div>
+      </form>
+      <br/>
+      <div class="table-responsive text-nowrap">
+        <div class="row align-items-start">
+          <div class="col">
+            <h3>Llevas <b>{{items}}</b> procedimiento(s).</h3>
+          </div>
+          <div class="col text-end">
+            <h3>Valor total: <b>{{ totalValue | currency}}</b></h3>
+          </div>
+        </div>
+        <table class="table">
+          <thead class="table-light">
+              <tr class="table-primary text-center">
+                  <th scope="col">Fecha<br/>Hora</th>
+                  <th scope="col">Procedimiento</th>
+                  <th scope="col">Tipo<br/>Procedimiento</th>
+                  <th scope="col">Finalidad</th>
+                  <th scope="col">Dx prin</th>
+                  <th scope="col">Dx Rel</th>
+                  <th scope="col">Via Ingreso</th>
+                  <th scope="col">profesional</th>
+                  <th scope="col">Valor</th>
+                  <th>acción</th>
+              </tr>
+          </thead>
+          <tbody class="table-border-bottom-0 table-color">
+            <tr *ngIf="procedimientos.length === 0">
+              <td colspan="10" class="text-center">No hay registros!</td>
+            </tr>
+            <tr *ngFor="let proc of procedimientos" class="text-center">
+                <td class="align-middle">{{proc.fecha | date: 'dd/MM/yyyy'}}<br/>{{proc.hora}}</td>
+                <td class="align-middle">{{proc.codigo}}</td>
+                <td class="align-middle">{{proc.tipoProcedimiento}}</td>
+                <td class="align-middle">{{proc.tipoDx}}</td>
+                <td class="align-middle">{{proc.dxPrincipal}}</td>
+                <td class="align-middle">{{proc.dxRelacionado1}}</td>
+                <td class="align-middle">{{proc.viaIngreso}}</td>
+                <td class="align-middle">{{proc.tipoDocumentoMedico}}<br/>{{proc.documentoMedico}}</td>
+                <td class="align-middle">{{proc.valor | currency}}</td>
+                <td class="align-middle">
+                  <button type="button" (click)="openModal(myModalContent, proc.id)" class="btn btn-success" data-bs-toggle="tooltip" title="Editar"><b><i class="bi bi-pencil"></i></b></button>
+                  &nbsp;
+                  <button type="button" (click)="onRemove(proc.id)" class="btn btn-danger" data-bs-toggle="tooltip" title="Eliminar"><b><i class="bi bi-trash3"></i></b></button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>
+
+<!-- bloque para modal -->
+<ng-template #myModalContent let-modal>
+  <div class="modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="card-title">Editar procedimiento</h2>
+          <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formModal" (ngSubmit)="onEdit()">
+          <div class="row">
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Fecha</label>
+              <div class="form-group">
+                <input
+                  type="date"
+                  formControlName="fechaModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['fechaModal'].errors }"
+                  value="{{ currentDate | date: 'dd/MM/yyyy' }}"
+                />
+                <div *ngIf="submitted && g['fechaModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['fechaModal'].errors['required']">* Campo requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-2 mb-3">
+              <label class="form-label">Hora</label>
+              <div class="form-group">
+                <input
+                  type="time"
+                  formControlName="horaModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['horaModal'].errors }"
+                />
+                <div *ngIf="submitted && g['horaModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['horaModal'].errors['required']">* Campo requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-7 mb-3"></div>
+            <div class="form-group col-md-4 mb-3">
+              <label class="form-label">Procedimiento</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="codigoModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['codigoModal'].errors }"
+                />
+                <div *ngIf="submitted && g['codigoModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['codigoModal'].errors['required']">* Campo requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-5 mb-3">
+              <label class="form-label">Tipo de procedimiento</label>
+              <div class="form-group">
+                <select
+                    formControlName="tipoModal"
+                    class="form-control"
+                  >
+                  <option *ngFor="let servicio of serviciosClinica" [value]="servicio.codigo">
+                    {{ servicio.nombre}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-md-3 mb-3">
+              <label class="form-label">Finalidad</label>
+              <div class="form-group">
+                <select
+                    formControlName="finalidadModal"
+                    class="form-control"
+                  >
+                  <option value="15">Diagnóstico</option>
+                  <option value="16">Tratamiento</option>
+                  <option value="17">Rehabilitación</option>
+                  <option value="44">Otra</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-md-5 mb-3">
+              <label class="form-label">Via de ingreso</label>
+              <div class="form-group">
+                <select
+                    formControlName="viaModal"
+                    class="form-control"
+                  >
+                  <option value="01">Demanda espontánea</option>
+                  <option value="02">Derivado de consulta externa</option>
+                  <option value="03">Derivado de urgencias</option>
+                  <option value="04">Derivado de hospitalización</option>
+                  <option value="05">Derivado de sala de cirugía</option>
+                  <option value="06">Derivado de sala de partos</option>
+                  <option value="07">Recién nacido en la institución</option>
+                  <option value="08">Recién nacido en otra institución</option>
+                  <option value="09">Derivado o referido de hospitalización domiciliaria</option>
+                  <option value="10">Derivado de atención domiciliaria</option>
+                  <option value="11">Derivado de telemedicina</option>
+                  <option value="12">Derivado de jornada de salud</option>
+                  <option value="13">Referido de otra institución</option>
+                  <option value="14">Contrarreferido de otra institución</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-md-2 mb-3">
+              <label class="form-label">Valor</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  formControlName="valorModal"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && g['valorModal'].errors }"
+                />
+                <div *ngIf="submitted && g['valorModal'].errors" class="invalid-feedback">
+                  <div *ngIf="g['valorModal'].errors['required']">* Campo requerido</div>
+                  <div *ngIf="g['valorModal'].errors['min']">* Valor mayor a 0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="onEdit()">Editar item</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
