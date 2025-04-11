@@ -66,6 +66,12 @@
       "nombre": "ERIKA LISETH SILVA BARBOSA",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 5
+    },{
+      "tipoDocumento": "CC",
+      "documento": "1070980344",
+      "nombre": "ZARITH VANESSA MARTINEZ SIERRA",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 6
     }
   ]
 }
