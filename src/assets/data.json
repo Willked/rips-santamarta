@@ -1,18 +1,15 @@
 {
-  "clinica":[
+  "clinica": [
     {
       "nombre": "AMBULANCIAS SANTA MARTA SAS",
       "nit": "901799284",
       "codigo": "252690509501"
     }
   ],
-  "servicios": [
-  ],
-  "consultas":[
-  ],
-  "diagnosticos":[
-  ],
-  "tecnologia":[
+  "servicios": [],
+  "consultas": [],
+  "diagnosticos": [],
+  "tecnologia": [
     {
       "codigo": "601T01",
       "nombre": "TRASLADO ASISTENCIAL BASICO TERRESTRE PRIMARIO"
@@ -34,7 +31,7 @@
       "nombre": "TRASLADO NEONATAL MEDICALIZADO"
     }
   ],
-  "personal":[
+  "personal": [
     {
       "tipoDocumento": "CC",
       "documento": "1073151347",
@@ -48,28 +45,32 @@
       "nombre": "LEIDY KATHERINE ORDOÑEZ VERA",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 2
-    },{
+    },
+    {
       "tipoDocumento": "CC",
       "documento": "1004037813",
       "nombre": "KELY ALEXANDRA DIAZ LONDOÑO",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 3
-    },{
+    },
+    {
       "tipoDocumento": "CC",
-      "documento": "1070980344",
-      "nombre": "ZARITH VANESA MARTINEZ SIERRA",
+      "documento": "1003657696",
+      "nombre": "ANGIE TATIANA VALBUENA CASTRO",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 4
-    },{
+    },
+    {
       "tipoDocumento": "CC",
       "documento": "1003511220",
       "nombre": "ERIKA LISETH SILVA BARBOSA",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 5
-    },{
+    },
+    {
       "tipoDocumento": "CC",
-      "documento": "1070980344",
-      "nombre": "ZARITH VANESSA MARTINEZ SIERRA",
+      "documento": "1000506041",
+      "nombre": "FRANK DAVID MEDINA VARGAS",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 6
     }
