@@ -73,6 +73,13 @@
       "nombre": "FRANK DAVID MEDINA VARGAS",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 6
+    },
+    {
+      "tipoDocumento": "CC",
+      "documento": "1007668828",
+      "nombre": "LISETH TATIANA GOMEZ VILLANUEVA",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 7
     }
   ]
 }
