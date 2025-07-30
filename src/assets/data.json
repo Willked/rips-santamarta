@@ -80,6 +80,13 @@
       "nombre": "LISETH TATIANA GOMEZ VILLANUEVA",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 7
+    },
+    {
+      "tipoDocumento": "CC",
+      "documento": "1003534533",
+      "nombre": "KAROL DANIELA RODRIGUEZ CARVAJAL",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 8
     }
   ]
 }
