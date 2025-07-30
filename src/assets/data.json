@@ -87,6 +87,13 @@
       "nombre": "KAROL DANIELA RODRIGUEZ CARVAJAL",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 8
+    },
+    {
+      "tipoDocumento": "CC",
+      "documento": "1003511258",
+      "nombre": "GERALDINE PATRICIA LEON JIMENEZ",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 9
     }
   ]
 }
