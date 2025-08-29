@@ -94,6 +94,20 @@
       "nombre": "GERALDINE PATRICIA LEON JIMENEZ",
       "cargo": "AUXILIAR DE ENFERMERIA",
       "codigo": 9
+    },
+    {
+      "tipoDocumento": "CC",
+      "documento": "1073174736",
+      "nombre": "YENNY CAROLINA BUITRAGO CANDELA",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 10
+    },
+    {
+      "tipoDocumento": "CC",
+      "documento": "1074187143",
+      "nombre": "YESICA VIVANA RODRIGUEZ VANEGAS",
+      "cargo": "AUXILIAR DE ENFERMERIA",
+      "codigo": 11
     }
   ]
 }
